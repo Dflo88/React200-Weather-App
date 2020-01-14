@@ -1,3 +1,6 @@
+import axios from 'axios';
+
+
 export function updateSearchBarDescription(description) {
     return {
         type: 'UPDATE_SEARCHBAR_DESCRIPTION',
@@ -5,11 +8,9 @@ export function updateSearchBarDescription(description) {
     };
 }
 
-export function searchCity(description) {
+export function searchWeather(description) {
     return {
-        type: 'SEARCH_CITY',
-        payload: {
-            description
-        }
+        type: 'SEARCH_WEATHER',
+        payload: axios.get(`/search/${description}`)
     };
 }
