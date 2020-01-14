@@ -1,5 +1,5 @@
 const defaultState = {
-    city: '',
+    description: '',
     lineItems: []
 };
 
