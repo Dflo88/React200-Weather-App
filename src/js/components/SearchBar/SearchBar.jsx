@@ -2,7 +2,7 @@ import React from 'react';
 
 import{
     updateSearchBarDescription,
-    searchCity
+    searchWeather
 } from './SearchBarActions';
 
 export default class SearchBar extends React.Component {
@@ -10,7 +10,7 @@ export default class SearchBar extends React.Component {
         super(props);
 
         this.handleDescriptionInput = this.handleDescriptionInput.bind(this);
-        this.handleSearchCity = this.handleSearchCity.bind(this);
+        this.handleGetWeather = this.handleGetWeather.bind(this);
     }
 
     handleDescriptionInput(event) {
@@ -19,9 +19,9 @@ export default class SearchBar extends React.Component {
         dispatch(updateSearchBarDescription(value));
     }
 
-    handleSearchCity() {
+    handleGetWeather() {
         const { description, dispatch } = this.props;
-        dispatch(searchCity(description));
+        dispatch(searchWeather(description));
     }
 
     render() {
@@ -38,7 +38,7 @@ export default class SearchBar extends React.Component {
                 <button 
                     type='button'
                     className='searchButton'
-                    onClick={ this.handleSearchCity }
+                    onClick={ this.handleGetWeather }
                     >Go!
                 </button>
             </div>

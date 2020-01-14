@@ -1,5 +1,6 @@
 const defaultState = {
     description: '',
+    weatherData:'',
     lineItems: []
 };
 
@@ -14,15 +15,22 @@ export default function SearchBarReducer (state = defaultState, action){
             };
         }
 
-        case 'SEARCH_CITY': {
+        case 'SEARCH_WEATHER': {
             const { description } = action.payload;
             return {
                 description: '',
+                weatherData: { description },
                 lineItems: [
                     ...state.lineItems,
-                    { description }
                 ]
             };
+        }
+
+        case 'SEARCH_WEATHER_FULFILLED': {
+            return {
+                ...state,
+                weatherData: action.payload
+            }
         }
 
         default: {
