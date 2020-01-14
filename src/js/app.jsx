@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchBar from './components/SearchBar/SearchBar.jsx'
-import WeatherOutput from './components/WeatherOutput/WeatherOuput.jsx'
-import SearchHistory from './components/SearchHistory/SearchHistory.jsx'
+import SearchBar from './components/SearchBar';
+import WeatherOutput from './components/WeatherOutput';
+import SearchHistory from './components/SearchHistory';
 
 export default class App extends React.Component {
   render() {
