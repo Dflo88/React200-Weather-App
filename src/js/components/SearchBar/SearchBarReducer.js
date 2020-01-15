@@ -1,7 +1,7 @@
 const defaultState = {
     description: '',
     weatherData:'',
-    lineItems: []
+    lineItems: {}
 };
 
 export default function SearchBarReducer (state = defaultState, action){
@@ -15,25 +15,35 @@ export default function SearchBarReducer (state = defaultState, action){
             };
         }
 
-        case 'SEARCH_WEATHER': {
-            const { description } = action.payload;
+        case 'SEARCH_WEATHER_PENDING': {
             return {
                 description: '',
-                weatherData: { description },
-                lineItems: [
+                lineItems: {
                     ...state.lineItems,
-                ]
-            };
+                }
+            }
         }
-
+        
         case 'SEARCH_WEATHER_FULFILLED': {
             return {
-                ...state,
-                weatherData: action.payload
+                description: '',
+                weatherData: action.payload,
+                lineItems: {
+                    ...state.lineItems ,
+                    [payload.data['name']]: new Date().toLocaleString(),
+                }
+            }
+        }
+
+        case 'SEARCH_WEATHER_REJECTED': {
+            console.log(type)
+            return {
+                ...state
             }
         }
 
         default: {
+            console.log(type)
             return state;
         }
     }  
