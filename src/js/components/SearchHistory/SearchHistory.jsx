@@ -7,7 +7,6 @@ export default class SearchHistory extends React.Component {
 
     render() {
         const { lineItems } = this.props
-        console.log(lineItems)
         return(
             <div className='container searchHistoryContainer'>
                 <div className='searchHistoryHeader'>Search History</div><br/>

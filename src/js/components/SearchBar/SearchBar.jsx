@@ -13,7 +13,8 @@ export default class SearchBar extends React.Component {
         this.handleGetWeather = this.handleGetWeather.bind(this);
         this.handlePredefinedCityWeather = this.handlePredefinedCityWeather.bind(this);
     }
-
+// The componentDidMount function makes an inital api call to get the weather for San Diego
+// when this app starts up. We use San Diego as out default location.
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(searchWeather('San Diego'))
@@ -29,7 +30,7 @@ export default class SearchBar extends React.Component {
         const { description, dispatch } = this.props;
         dispatch(searchWeather(description));
     }
-
+// This function finds the weather for predefined cities located above the search bar.
     handlePredefinedCityWeather(event) {
         const { dispatch } = this.props;
         const { value } = event.target;

@@ -2,14 +2,14 @@ const defaultState = {
     description: '',
     weatherData:{
         'Temperature (F)': '',
-        'Pressure': '',
+        'Pressure (hPa)': '',
         'Humidity (%)': '',
         'Lowest Temperature (F)': '',
         'Highest Temperature (F)': '',
         'Wind Speed (mph)': '',
-        'icon': '',
     },
     lineItems: [],
+    icon: '',
 };
 
 export default function SearchBarReducer (state = defaultState, action){
@@ -28,25 +28,28 @@ export default function SearchBarReducer (state = defaultState, action){
                 description: '',
                 weatherData: {
                     'Temperature (F)': action.payload.data.main.temp,
-                    'Pressure': action.payload.data.main.pressure,
+                    'Pressure (hPa)': action.payload.data.main.pressure,
                     'Humidity (%)': action.payload.data.main.humidity,
                     'Lowest Temperature (F)': action.payload.data.main.temp_min,
                     'Highest Temperature (F)': action.payload.data.main.temp_max,
                     'Wind Speed (mph)': action.payload.data.wind.speed,
-                    'icon': action.payload.data.weather[0]['icon'],
                 },
-                lineItems: [ [payload.data['name'], new Date().toLocaleString()], ...state.lineItems
-                    // ...state.lineItems ,
-                    // [payload.data['name']]: new Date().toLocaleString(),
-                ]
-            }
+                lineItems: [ [payload.data['name'], new Date().toLocaleString()], ...state.lineItems ],
+                icon : action.payload.data.weather[0]['icon'],
+            };
         }
 
         case 'SEARCH_WEATHER_REJECTED': {
-            console.log(type)
+            alert(`I'm sorry, but we cant seem to find that city in our data base. Please enter a different city`)
             return {
                 ...state
-            }
+            };
+        }
+
+        case 'SEARCH_WEATHER_PENDING': {
+            return {
+                ...state
+            };
         }
 
         default: {

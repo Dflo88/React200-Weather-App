@@ -5,6 +5,7 @@ function mapStoreToProps(store) {
     return {
         weatherData: store.SearchBar.weatherData,
         lineItems: store.SearchBar.lineItems,
+        icon: store.SearchBar.icon,
     }
 }
 
