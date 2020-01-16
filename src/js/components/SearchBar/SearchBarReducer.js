@@ -1,7 +1,15 @@
 const defaultState = {
     description: '',
-    weatherData:'',
-    lineItems: {}
+    weatherData:{
+        'Temperature (F)': '',
+        'Pressure': '',
+        'Humidity (%)': '',
+        'Lowest Temperature (F)': '',
+        'Highest Temperature (F)': '',
+        'Wind Speed (mph)': '',
+        'icon': '',
+    },
+    lineItems: [],
 };
 
 export default function SearchBarReducer (state = defaultState, action){
@@ -14,24 +22,23 @@ export default function SearchBarReducer (state = defaultState, action){
                 description: payload.description
             };
         }
-
-        case 'SEARCH_WEATHER_PENDING': {
-            return {
-                description: '',
-                lineItems: {
-                    ...state.lineItems,
-                }
-            }
-        }
         
         case 'SEARCH_WEATHER_FULFILLED': {
             return {
                 description: '',
-                weatherData: action.payload,
-                lineItems: {
-                    ...state.lineItems ,
-                    [payload.data['name']]: new Date().toLocaleString(),
-                }
+                weatherData: {
+                    'Temperature (F)': action.payload.data.main.temp,
+                    'Pressure': action.payload.data.main.pressure,
+                    'Humidity (%)': action.payload.data.main.humidity,
+                    'Lowest Temperature (F)': action.payload.data.main.temp_min,
+                    'Highest Temperature (F)': action.payload.data.main.temp_max,
+                    'Wind Speed (mph)': action.payload.data.wind.speed,
+                    'icon': action.payload.data.weather[0]['icon'],
+                },
+                lineItems: [ [payload.data['name'], new Date().toLocaleString()], ...state.lineItems
+                    // ...state.lineItems ,
+                    // [payload.data['name']]: new Date().toLocaleString(),
+                ]
             }
         }
 
@@ -43,7 +50,6 @@ export default function SearchBarReducer (state = defaultState, action){
         }
 
         default: {
-            console.log(type)
             return state;
         }
     }  

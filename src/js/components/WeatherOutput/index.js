@@ -1,3 +1,11 @@
+import { connect } from 'react-redux';
 import WeatherOutput from './WeatherOuput';
 
-export default WeatherOutput;
+function mapStoreToProps(store) {
+    return {
+        weatherData: store.SearchBar.weatherData,
+        lineItems: store.SearchBar.lineItems,
+    }
+}
+
+export default connect(mapStoreToProps)(WeatherOutput);

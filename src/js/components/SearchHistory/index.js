@@ -1,3 +1,9 @@
+import { connect } from 'react-redux';
 import SearchHistory from './SearchHistory';
 
-export default SearchHistory;
+function mapStoreToProps(store) {
+    return {
+        lineItems: store.SearchBar.lineItems,
+    };  
+}
+export default connect(mapStoreToProps)(SearchHistory);

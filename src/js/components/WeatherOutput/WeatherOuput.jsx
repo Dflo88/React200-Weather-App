@@ -6,34 +6,26 @@ export default class WeatherOutput extends React.Component {
     }
 
     render() {
+        const { weatherData, lineItems } = this.props;
+        const currentCityName = ((lineItems[0] || [])[0])
+        const weatherDataPropertyName = Object.keys(weatherData);
+        const weatherDataPropertyValue = Object.values(weatherData);
+        
         return(
             <div className='container weatherOutputContainer'>
                 <div className='weatherOutputHeader'>City Information</div>
-                <div className='weatherOutputCityName'>San Diego</div>
-                <div className='weatherOutputDetails'>
-                    <p>Temp(F)</p>
-                    <p>prop data</p>
+                <div className='weatherOutputCityName'>
+                    <p>{currentCityName}</p>
+                    <img src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`} />
                 </div>
-                <div className='weatherOutputDetails'>
-                    <p>Pressure</p>
-                    <p>prop data</p>
-                </div>
-                <div className='weatherOutputDetails'>
-                    <p>Humidity</p>
-                    <p>prop data</p>    
-                </div>
-                <div className='weatherOutputDetails'>
-                    <p>Lowest Temperature (F)</p>
-                    <p>prop data</p>    
-                </div>
-                <div className='weatherOutputDetails'>
-                    <p>Highest Temperature (F)</p>
-                    <p>prop data</p>
-                </div>
-                <div className='weatherOutputDetails'>
-                    <p>Wind Speed</p>
-                    <p>prop data</p>
-                </div>
+                {
+                    weatherDataPropertyName.map((propertyName,i) => 
+                        <div className='weatherOutputDetails' key={propertyName}>
+                            <p>{propertyName}</p>
+                            <p>{weatherDataPropertyValue[i]}</p>
+                        </div>
+                    )
+                }
             </div>
         );
     }

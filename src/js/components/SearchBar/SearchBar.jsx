@@ -11,6 +11,12 @@ export default class SearchBar extends React.Component {
 
         this.handleDescriptionInput = this.handleDescriptionInput.bind(this);
         this.handleGetWeather = this.handleGetWeather.bind(this);
+        this.handlePredefinedCityWeather = this.handlePredefinedCityWeather.bind(this);
+    }
+
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(searchWeather('San Diego'))
     }
 
     handleDescriptionInput(event) {
@@ -24,10 +30,24 @@ export default class SearchBar extends React.Component {
         dispatch(searchWeather(description));
     }
 
+    handlePredefinedCityWeather(event) {
+        const { dispatch } = this.props;
+        const { value } = event.target;
+        dispatch(searchWeather(value));
+    }
+
     render() {
-        const { description, lineItems } = this.props;
+        const { description } = this.props;
         return(
             <div className='container'>
+                <div className='predefinedSearchCityContainer'>
+                    <button value='San Salvador' onClick={this.handlePredefinedCityWeather}>San Salvador</button>
+                    <button value='Belize City' onClick={this.handlePredefinedCityWeather}>Belize City</button>
+                    <button value='Van Nuys' onClick={this.handlePredefinedCityWeather}>Van Nuys</button>
+                    <button value='San Luis Obispo' onClick={this.handlePredefinedCityWeather}>San Luis Obispo</button>
+                    <button value='Pacific Palisades' onClick={this.handlePredefinedCityWeather}>Pacific Palisades</button>
+                    <button value='San Diego' onClick={this.handlePredefinedCityWeather}>San Diego</button>
+                </div>
                 <input 
                     type='text' 
                     className='searchInput' 
